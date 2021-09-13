@@ -7,38 +7,36 @@ import java.util.LinkedList;
 
 public class ParticleCell {
 
-	Rectangle body;
-	HashMap<Integer,Particle> content=new HashMap<Integer,Particle>();
-	int locx,locy;
-	ParticleControler master;
-	ParticleCell(Rectangle body,int i, int j,ParticleControler m)
+	public final Rectangle body; //can only be read
+	private final HashMap<Integer,Particle> content = new HashMap<>();
+
+	public ParticleCell(Rectangle body)
 	{
-		this.body=body;
-		locx=i;
-		locy=j;
-		master=m;
+		this.body = body;
 	}
-	boolean contains(Particle a)
+
+	public boolean contains(Particle a)
 	{
-		
 		return body.contains(a);
 	}
-	void add(Particle a)
+
+	public void add(Particle a)
 	{
-		
 	    content.put(a.id, a);
 	}
+
 	public void draw(BufferedImage img) {
 		for(Particle a : content.values())
 		{
 			a.draw(img);
 		}
-		
 	}
+
 	public LinkedList<Particle> move()
 	{
-		LinkedList<Particle> deleted=new LinkedList<Particle>();
-		LinkedList<Integer> toRemove=new LinkedList<Integer>();
+		LinkedList<Particle> deleted= new LinkedList<>();
+		LinkedList<Integer> toRemove= new LinkedList<>();
+
 		for(Particle a : content.values())
 		{
 			a.move();
@@ -55,46 +53,43 @@ public class ParticleCell {
 		}
 		return deleted;
 	}
+
 	public void update()
 	{
-		
 		for(Particle a : content.values())
 		{
 			a.update();
 		}
-		
 	}
-	public LinkedList<Particle> getParticles(ParticleControler.I condition)
+
+	public LinkedList<Particle> getParticles(ParticleController.I condition)
 	{	
-		LinkedList<Particle> particles = new LinkedList<Particle>();
+		LinkedList<Particle> particles = new LinkedList<>();
 	
 		for(Particle a : content.values())
 		{
 			if(condition.check(a))
 				particles.add(a);
-			
 		}
-		
 		return particles;
-		
 	}
+
 	public float getMaxVel()
 	{
-		float f=0;
+		float maxVel = 0;
 		for(Particle a : content.values())
 		{
-			if(a.getVel()>f)
-				f=a.getVel();
+			if(a.getVel() > maxVel)
+				maxVel = a.getVel();
 		}
-		return f;
+		return maxVel;
 	}
+
 	public void setColor(float maxVel)
 	{
 		for(Particle a : content.values())
 		{
 			a.setColor(maxVel);
-			
-			
 		}
 	}
 	

@@ -9,6 +9,7 @@ public class KeyboardListener implements KeyListener {
 	{
 		
 	}
+
 	@Override
 	public void keyTyped(KeyEvent e) {
 		
@@ -18,7 +19,7 @@ public class KeyboardListener implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 
-		if(e.getKeyCode()==KeyEvent.VK_ESCAPE)
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
 		{
 			System.exit(0);
 		}

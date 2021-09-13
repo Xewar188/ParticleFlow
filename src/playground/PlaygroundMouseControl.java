@@ -10,69 +10,59 @@ public class PlaygroundMouseControl implements MouseListener, MouseWheelListener
 
 	
 	Playground play;
+
 	public PlaygroundMouseControl(Playground p)
 	{
-		play= p;
+		play = p;
 	}
+
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		
-			play.creator.onDragged(e.getPoint());
+		play.creator.onDragged(e.getPoint());
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		
-		play.creator.p=e.getPoint();
+		play.creator.setCurrentMousePoint(e.getPoint());
 	}
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		
-		if(e.getPreciseWheelRotation()>0)
+		if(e.getPreciseWheelRotation() > 0)
 		{
-			play.creator.next(e.getPoint());
+			play.creator.next();
 		}
 		else
 		{
-			play.creator.previous(e.getPoint());
+			play.creator.previous();
 		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-	
 		play.storage.onClick(e.getPoint());
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if(e.getButton()==MouseEvent.BUTTON1)
-		play.creator.onPress(e.getPoint());
-		else
-		if(e.getButton()==MouseEvent.BUTTON3)
+		if (e.getButton() == MouseEvent.BUTTON1)
+			play.creator.onPress(e.getPoint());
+		else if (e.getButton() == MouseEvent.BUTTON3)
 			play.creator.stop();
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(e.getButton()==MouseEvent.BUTTON3)
+		if (e.getButton() == MouseEvent.BUTTON3)
 			play.creator.stop();
-		else
-		if(e.getButton()==MouseEvent.BUTTON1)
-		play.creator.onRelease(e.getPoint());
+		else if (e.getButton() == MouseEvent.BUTTON1)
+			play.creator.onRelease(e.getPoint());
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		
-		
-	}
+	public void mouseEntered(MouseEvent e) {}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
-		
-		
-	}
+	public void mouseExited(MouseEvent e) {}
 
 }

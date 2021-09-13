@@ -2,11 +2,12 @@ package main;
 
 import window.MainWindow;
 
+import java.awt.*;
+
 public class Main {
 
 	public static void main(String[] args) {
-		
-		new MainWindow();
+		EventQueue.invokeLater(MainWindow::new);
 	}
 
 }

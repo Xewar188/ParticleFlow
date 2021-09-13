@@ -4,45 +4,41 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.LinkedList;
 
-import particles.ParticleControler;
+import particles.ParticleController;
 
 public class DeviceStorage {
 
-	ParticleControler main;
-	LinkedList<Device> devices=new LinkedList<Device>();
-	public DeviceStorage(ParticleControler c)
+	private final ParticleController main;
+	private final LinkedList<Device> devices = new LinkedList<>();
+	public DeviceStorage(ParticleController c)
 	{
-		main=c;
+		main = c;
 	}
-	void add(Device x)
+	public void add(Device x)
 	{
 		devices.add(x);
 	}
 	public void onClick(Point p)
 	{
 		Device toRemove = null;
-		for(Device d:devices)
+		for(Device d : devices)
 		{
-			if(d.contains(p))
-			if(d.onClick())
-			{
-				toRemove=d;
-			}
-			
+			if(d.contains(p) && d.onClick() )
+				toRemove = d;
+
 		}
-		
 			devices.remove(toRemove);
 	}
 	public void draw(Graphics2D g)
 	{
-		for(Device d:devices)
+		for(Device d : devices)
 		{
 			d.draw(g);
 		}
 	}
 	public void update()
 	{
-		for(Device d:devices)
+		for(Device d : devices)
 		{
 			d.update(main);
 		}
