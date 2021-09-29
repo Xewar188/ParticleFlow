@@ -31,7 +31,11 @@ public class Circle extends Device {
             r1 = new Vector2D(body.x - a.x, body.y - a.y);
             double ang;
             if (a.getX() != 0 || a.getYVel() != 0) {
-                ang = Vector2D.angle(v, r1);
+                try {
+                    ang = Vector2D.angle(v, r1);
+                } catch (Exception e) {
+                    return;
+                }
                 double v1 = a.getVel();
                 v1 = v1 * Math.cos(ang);
                 a.changeXVel((float) (-2 * v1 * (body.x - a.x) / Math.sqrt(Math.pow(body.x - a.x, 2) + Math.pow(body.y - a.y, 2))));
